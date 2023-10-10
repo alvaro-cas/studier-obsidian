@@ -1,0 +1,28 @@
+.h2-modal {
+  text-align: center;
+  color: var(--text-normal);
+}
+
+.div-question-modal {
+  text-align: left;
+  font-style: italic;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.div-correct-modal {
+  text-align: left;
+  color: var(--accent-green);
+  margin-left: 20px;
+}
+
+.div-incorrect-modal {
+  text-align: left;
+  color: var(--accent-red);
+  text-decoration: line-through;
+  margin-left: 20px;
+}
+
+.spacer {
+  margin-top: 20px;
+}
