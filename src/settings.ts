@@ -25,10 +25,9 @@ export class StudierSettings extends PluginSettingTab {
     var { containerEl } = this;
 
     containerEl.empty();
-    containerEl.createEl('h1', { text: 'Settings: Studier' });
 
     new Setting(containerEl)
-      .setName('Questions Intializer')
+      .setName('Questions intializer')
       .setDesc(`The character(s) used to identify where the questions begin. Default: "${DEFAULT_SETTINGS['questionInit']}"`)
       .addText(text =>
         text
@@ -39,7 +38,7 @@ export class StudierSettings extends PluginSettingTab {
           }))
 
     new Setting(containerEl)
-      .setName('Questions Ender')
+      .setName('Questions ender')
       .setDesc(`The character(s) used to identify the delimiter for reading the questions. Default: "${DEFAULT_SETTINGS['questionEnd']}"`)
       .addText(text =>
         text
@@ -50,7 +49,7 @@ export class StudierSettings extends PluginSettingTab {
           }))
 
     new Setting(containerEl)
-      .setName('Starter Question Indicator')
+      .setName('Starter question indicator')
       .setDesc(`The character(s) used to identify where the question begins. Default: "${DEFAULT_SETTINGS['startChar']}"`)
       .addText(text =>
         text
@@ -61,7 +60,7 @@ export class StudierSettings extends PluginSettingTab {
           }))
 
     new Setting(containerEl)
-      .setName('Correct Answer Indicator')
+      .setName('Correct answer indicator')
       .setDesc(`The character(s) used to identify the correct answer. Default: "${DEFAULT_SETTINGS['correctChar']}"`)
       .addText(text =>
         text
@@ -74,13 +73,36 @@ export class StudierSettings extends PluginSettingTab {
 
     containerEl.createEl('h3', { text: 'Donations' });
 
-    containerEl.createEl('div', {}, div => {
-      div.innerHTML += `💰You can support by donating <a href="https://liberapay.com/Cuatroy2/donate">here</a> or contributing to the plugin. As well, you can check out more content on <a href="https://medium.com/@cuatroy2">Medium</a> and <a href="https://github.com/alvaro-cas">GitHub</a>. Enjoy!`
-    })
+    containerEl.createEl("span", {
+      text: "💰You can support by donating "
+    }).createEl("a", {
+      href: "https://liberapay.com/Cuatroy2/donate",
+      text: "here"
+    });
+    containerEl.createEl("span", {
+      text: " or contributing to the plugin. As well, you can check out more content on ",
+    }).createEl("a", {
+      href: "https://medium.com/@cuatroy2",
+      text: "Medium"
+    });
+    containerEl.createEl("span", {
+      text: " and ",
+    }).createEl("a", {
+      href: "https://github.com/alvaro-cas",
+      text: "Github"
+    });
+    containerEl.createEl("span", {
+      text: ". Enjoy!",
+    });
 
-    containerEl.createEl('div', {}, div => {
-      div.innerHTML += `<a href="https://liberapay.com/Cuatroy2/donate"><img src="https://img.shields.io/badge/Liberapay-F6C915?style=for-the-badge&logo=liberapay&logoColor=black"></a>`
-    })
+    const liberapay = this.containerEl.createDiv("liberapay");
+    liberapay.createEl("a", {
+      href: "https://liberapay.com/Cuatroy2/donate"
+    }).createEl("img", {
+      attr: {
+        src: "https://img.shields.io/badge/Liberapay-F6C915?style=for-the-badge&logo=liberapay&logoColor=black"
+      }
+    });
 
   }
 }
