@@ -19,12 +19,9 @@ export default class StudierPlugin extends Plugin {
     this.addCommand({
       id: 'open-studier',
       name: 'Open random note.',
-      checkCallback: (checking: boolean) => {
-        if (!checking) {
-          this.openRandomStudy();
-        }
-        return true;
-      }
+      callback: () => {
+        this.openRandomStudy();
+      },
     })
 
     this.addSettingTab(new StudierSettings(this.app, this));
