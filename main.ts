@@ -13,14 +13,22 @@ export default class StudierPlugin extends Plugin {
 
     // Add executers
     this.addRibbonIcon("graduation-cap", "Studier", () => {
-      this.openRandomStudy();
+      this.openRandomStudy(false);
     });
 
     this.addCommand({
       id: 'open-studier',
       name: 'Open random note.',
       callback: () => {
-        this.openRandomStudy();
+        this.openRandomStudy(false);
+      },
+    })
+
+    this.addCommand({
+      id: 'open-studier-1',
+      name: 'Open current note.',
+      callback: () => {
+        this.openRandomStudy(true);
       },
     })
 
@@ -40,7 +48,7 @@ export default class StudierPlugin extends Plugin {
     await this.saveData(this.settings);
   }
 
-  async openRandomStudy() {
+  async openRandomStudy(openCurrent: boolean) {
     // Get all markdown files
     var markdownFiles = this.app.vault.getMarkdownFiles();
     markdownFiles = markdownFiles.filter((file) => file.extension === 'md');
@@ -51,13 +59,18 @@ export default class StudierPlugin extends Plugin {
     }
 
     // Select and open random markdown
-    const randomMarkdown = markdownFiles.length * Math.random();
-    const markdownOpen = markdownFiles[(randomMarkdown) << 0];
-    await this.app.workspace.openLinkText(markdownOpen.basename, '');
+    var fileName = ""
+    if (!openCurrent) {
+      const randomMarkdown = markdownFiles.length * Math.random();
+      const markdownOpen = markdownFiles[(randomMarkdown) << 0];
+      fileName = markdownOpen.basename
+      await this.app.workspace.openLinkText(fileName, '');
+    }
     // await this.app.workspace.openLinkText('my_test_questions', '');
 
     // Get content
     const activeView = this.app.workspace.getActiveViewOfType(MarkdownView);
+    fileName = activeView.file.basename
     var content = "";
 
     if (activeView) {
@@ -128,6 +141,6 @@ export default class StudierPlugin extends Plugin {
                   this.settings,
                   questions,
                   answers,
-                  markdownOpen.basename).open();
+                  fileName).open();
   }
 }
